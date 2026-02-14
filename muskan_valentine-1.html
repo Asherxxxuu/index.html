@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Muskan ❤️</title>
+<style>
+body{
+ margin:0;
+ height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-family:'Segoe UI',sans-serif;
+ overflow:hidden;
+ background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ff9a9e,#fad0c4);
+ background-size:400% 400%;
+ animation:bg 12s ease infinite;
+ color:white;
+}
+@keyframes bg{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+.card{
+ background:rgba(255,255,255,0.15);
+ padding:40px;
+ border-radius:25px;
+ backdrop-filter: blur(18px);
+ box-shadow:0 10px 40px rgba(0,0,0,0.25);
+ text-align:center;
+ width:340px;
+}
+button{
+ padding:12px 25px;
+ margin:8px;
+ border:none;
+ border-radius:40px;
+ font-size:17px;
+ cursor:pointer;
+ transition:.3s;
+}
+button:hover{transform:scale(1.12);}
+#yes{background:#ff4d6d;color:white;}
+#no{background:white;color:#ff4d6d;}
+#secretBtn{background:#ffd166;color:black;}
+#msg{margin-top:20px;font-size:20px;min-height:50px;}
+.heart{
+ position:absolute;
+ font-size:22px;
+ animation:float 6s linear infinite;
+}
+@keyframes float{
+ from{transform:translateY(100vh);}
+ to{transform:translateY(-10vh);}
+}
+.confetti{
+ position:absolute;
+ width:10px;
+ height:10px;
+ animation:fall 3s linear forwards;
+}
+@keyframes fall{
+ to{transform:translateY(100vh) rotate(720deg);opacity:0;}
+}
+.cry{
+ position:absolute;
+ font-size:26px;
+ animation:fall 4s linear forwards;
+}
+.slide{
+ display:none;
+ font-size:22px;
+ margin-top:15px;
+}
+.active{display:block;}
+</style>
+</head>
+<body>
+<div class="card">
+<h2>Muskan 💖</h2>
+<h3>Will you be my Valentine?</h3>
+<button id="yes">Yes 😍</button>
+<button id="no">No 💔</button>
+<br>
+<button id="secretBtn">🔐 Secret</button>
+<button onclick="music()">🎶 Music</button>
+<div id="msg"></div>
+<div class="slide active">You + Me = ❤️</div>
+<div class="slide">You're my favorite notification 💌</div>
+<div class="slide">Life feels softer with you 🌸</div>
+<div class="slide">You make my world glow ✨</div>
+</div>
+
+
+
+
+<div style="margin-top:15px">
+<iframe id="ytplayer" width="0" height="0"
+src="https://www.youtube.com/embed/98WtmW-lfeE?enablejsapi=1"
+title="Teenage Dream"
+frameborder="0"
+allow="autoplay"></iframe>
+</div>
+
+<script>
+const msg=document.getElementById("msg");
+
+setInterval(()=>{
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="💗";
+ h.style.left=Math.random()*100+"vw";
+ h.style.animationDuration=(4+Math.random()*3)+"s";
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),7000);
+},500);
+
+let slides=document.querySelectorAll(".slide");
+let i=0;
+setInterval(()=>{
+ slides[i].classList.remove("active");
+ i=(i+1)%slides.length;
+ slides[i].classList.add("active");
+},2500);
+
+function music(){
+ var iframe=document.getElementById("ytplayer");
+ iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+}
+
+document.getElementById("yes").onclick=()=>{
+ msg.innerHTML="YESSSS 🥹💞 I knew it!! You're officially mine forever 💘";
+ fireworks();
+};
+
+document.getElementById("no").onclick=()=>{
+ msg.innerHTML="NOOOO 😭💔 My heart shattered into 1000 pieces 😭";
+ cry();
+};
+
+document.getElementById("secretBtn").onclick=()=>{
+ msg.innerHTML="Secret Message 💌: I like you more every single day ❤️";
+};
+
+function fireworks(){
+ for(let i=0;i<150;i++){
+  let c=document.createElement("div");
+  c.className="confetti";
+  c.style.left=Math.random()*100+"vw";
+  c.style.background=`hsl(${Math.random()*360},100%,60%)`;
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),3000);
+ }
+}
+
+function cry(){
+ for(let i=0;i<40;i++){
+  let c=document.createElement("div");
+  c.className="cry";
+  c.innerHTML="😭";
+  c.style.left=Math.random()*100+"vw";
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),4000);
+ }
+}
+</script>
+</body>
+</html>
